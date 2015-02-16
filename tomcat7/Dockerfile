@@ -1,6 +1,6 @@
 FROM ubuntu:14.04
 MAINTAINER Bharat Akkinepalli <bharatak@thoughtworks.com>
-ENV REFRESHED_AT 2015-02-14T20:38
+ENV REFRESHED_AT 2015-02-16T07:17
 
 RUN apt-get -yqq update
 RUN apt-get -yqq install tomcat7 default-jdk
