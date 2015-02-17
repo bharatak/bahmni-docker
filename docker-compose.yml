@@ -1,3 +1,11 @@
+apache:
+ image: bharatak/bahmni-apache
+ ports:
+  - "49003:8080"
+ volumes:
+  - ~/apache-volume:/var/www
+ links:
+  - web
 web:
  image: bharatak/bahmni-web
  ports:
@@ -8,6 +16,8 @@ web:
   - OPENMRS_RUNTIME_PROPERTIES_FILE=/root/.OpenMRS/openmrs-runtime.properties
  links:
   - mysql
+ expose:
+  - "8080"
 mysql:
  image: bharatak/bahmni-mysql
  environment: 
