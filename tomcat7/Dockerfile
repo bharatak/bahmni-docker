@@ -13,9 +13,14 @@ ENV CATALINA_TMPDIR /tmp/tomcat7-tomcat7-tmp
 
 RUN mkdir -p $CATALINA_TMPDIR
 
+ADD openmrs.war /var/lib/tomcat7/webapps/openmrs.war
+ADD openmrs-runtime.properties /root/.OpenMRS/openmrs-runtime.properties
+ADD bahmnicore.properties /root/.OpenMRS/bahmnicore.properties
+RUN chown -R root:root /root/.OpenMRS
+
 VOLUME [ "/var/lib/tomcat7/webapps/" ]
 
-VOLUME [ "/root/.OpenMRS" ]
+VOLUME [ "/root/.OpenMRS/modules" ]
 
 EXPOSE 8080
 
