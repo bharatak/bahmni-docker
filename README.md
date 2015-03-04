@@ -1,5 +1,5 @@
-Installing Docker:
-==================
+Bahmni Docker Containers
+========================
 
 ## Install boot2docker
 
@@ -57,9 +57,9 @@ The docker containers can share the paths of host machine (vm).  Boot2Docker alr
 4. At this point in time, the database is a default database.  We need to restore a bahmni database.  Run the following commands to accomplish this task.
  * Get the container ID of mysql.  Run "docker ps" command.
  * Go inside the mysql database container - 
- 		docker exec -it <CONTAINER_ID> /bin/bash;
+ 		docker exec -it CONTAINER_ID /bin/bash;
  * Go to /root folder.  There is a database dump.  Restore it.
-  	mysql -uroot -ppassword mysql_backup.sql
+  	mysql -uroot -ppassword < mysql_backup.sql
  4. At this point, the database is restored and will be available during multiple restarts of the containers.  Now, restart your containers using the following commands
 	 * docker-compose stop
 	 * docker-compose start
