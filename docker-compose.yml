@@ -19,6 +19,7 @@ web:
   - "8080"
  volumes:
   - ~/dock/openmrs-distro-bahmni/distro/target/distro:/root/.OpenMRS/modules
+  - ~/dock/jss-config/openmrs/obscalculator:/root/.OpenMRS/obscalculator
 mysql:
  image: bahmni-mysql
  environment: 

@@ -22,6 +22,8 @@ VOLUME [ "/var/lib/tomcat7/webapps/" ]
 
 VOLUME [ "/root/.OpenMRS/modules" ]
 
+VOLUME [ "/root/.OpenMRS/obscalculator" ]
+
 EXPOSE 8080
 
 ENTRYPOINT [ "/usr/share/tomcat7/bin/catalina.sh", "run" ]
