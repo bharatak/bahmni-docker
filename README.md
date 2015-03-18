@@ -8,7 +8,7 @@ Bahmni Docker Containers
 https://docs.docker.com/installation/mac/
 
 * Set the DOCKER_HOST environment variable in your .bashrc or .zshrc
-The Docker client assumes the Docker host is the current machine. We need to tell it to use our boot2docker VM by setting the DOCKER_HOST environment variable:
+The Docker client assumes the Docker host is the current machine. We need to tell it to use our boot2docker VM by setting the DOCKER_HOST (The IP can be known from "boot2docker ip" command.) environment variable:
 
 ```
 export DOCKER_HOST=tcp://192.168.59.103:2376
@@ -16,9 +16,9 @@ export DOCKER_CERT_PATH=~/.boot2docker/certs/boot2docker-vm
 export DOCKER_TLS_VERIFY=1
 ```
 
-The IP can be known from the previous command or from "boot2docker ip" command.
+* use "docker info" to check if the installation went of well.
 
-This is a very intersting blog the explains other features like port-forwarding from your mac to boot2docker etc. - http://viget.com/extend/how-to-use-docker-on-os-x-the-missing-guide
+This is a very interesting blog the explains other features like port-forwarding from your mac to boot2docker etc. - http://viget.com/extend/how-to-use-docker-on-os-x-the-missing-guide
 
 ## Installing Docker Compose (fig)
 
@@ -28,12 +28,13 @@ https://github.com/docker/fig/releases
 Run the following command for installation
 
 ```
-curl -L https://github.com/docker/fig/releases/download/1.1.0-rc2/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose; chmod +x /usr/local/bin/docker-compose
+sudo curl -L https://github.com/docker/fig/releases/download/1.1.0-rc2/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose; chmod +x /usr/local/bin/docker-compose
 ```
 ## Build bahmni-docker:
 
 1. Checkout the project https://github.com/bharatak/bahmni-docker
 2. Build the docker containers.
+ * cd bahmni-docker
  * docker build -t bahmni-apache apache/
  * docker build -t bahmni-mysql mysql/
  * docker build -t bahmni-web tomcat7/
