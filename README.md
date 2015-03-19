@@ -64,5 +64,5 @@ The docker containers can share the paths of host machine (vm).  Boot2Docker alr
  4. At this point, the database is restored and will be available during multiple restarts of the containers.  Now, restart your containers using the following commands
 	 * docker-compose stop
 	 * docker-compose start
-5. Navigate to https://localhost:49003/bahmni/home to access the Bahmni Apps.
-6. Navigate to http://localhost:49001/openmrs to access OpenMRS
+5. Navigate to https://localhost:49003/bahmni/home to access the Bahmni Apps. In case localhost is not accessible : get ip from - "boot2docker ip" command.
+6. Navigate to http://localhost:49001/openmrs to access OpenMRS. In case localhost is not accessible : get ip from - "boot2docker ip" command.
