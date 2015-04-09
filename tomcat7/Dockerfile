@@ -16,6 +16,8 @@ RUN mkdir -p $CATALINA_TMPDIR
 ADD openmrs.war /var/lib/tomcat7/webapps/openmrs.war
 ADD openmrs-runtime.properties /root/.OpenMRS/openmrs-runtime.properties
 ADD bahmnicore.properties /root/.OpenMRS/bahmnicore.properties
+ADD setupDbAndStart.sh /root/.OpenMRS/setupDbAndStart.sh
+RUN chmod 777 /root/.OpenMRS/setupDbAndStart.sh
 RUN chown -R root:root /root/.OpenMRS
 
 VOLUME [ "/var/lib/tomcat7/webapps/" ]
@@ -26,4 +28,4 @@ VOLUME [ "/root/.OpenMRS/obscalculator" ]
 
 EXPOSE 8080
 
-ENTRYPOINT [ "/usr/share/tomcat7/bin/catalina.sh", "run" ]
+ENTRYPOINT [ "/root/.OpenMRS/setupDbAndStart.sh" ]

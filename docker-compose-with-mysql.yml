@@ -1,8 +1,7 @@
 apache:
  image: bahmni-apache
  ports:
-  - "443:8080"
- mem_limit: 512m
+  - "49003:8080"
  volumes:
   - ~/dock/jss-config:/var/www/bahmni_config
   - ~/dock/openmrs-module-bahmniapps/ui/app:/var/www/bahmniapps
@@ -11,13 +10,19 @@ apache:
 web:
  image: bahmni-web
  ports:
-  - "8080:8080"
+  - "49001:8080"
  environment:
   - OPENMRS_RUNTIME_PROPERTIES_FILE=/root/.OpenMRS/openmrs-runtime.properties
-  - MYSQL=10.136.20.16
+ links:
+  - mysql
  expose:
   - "8080"
- mem_limit: 2000m
  volumes:
   - ~/dock/openmrs-distro-bahmni/distro/target/distro:/root/.OpenMRS/modules
   - ~/dock/jss-config/openmrs/obscalculator:/root/.OpenMRS/obscalculator
+mysql:
+ image: bahmni-mysql
+ environment: 
+  - MYSQL_ROOT_PASSWORD=password
+ ports:
+  - "49000:3306"

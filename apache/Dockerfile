@@ -29,7 +29,8 @@ WORKDIR /var/www
 
 
 EXPOSE 443
-VOLUME [ "/var/www" ]
+VOLUME [ "/var/www/bahmni_config" ]
+VOLUME [ "/var/www/bahmniapps" ]
 
 ENTRYPOINT [ "/usr/sbin/apache2" ]
 
