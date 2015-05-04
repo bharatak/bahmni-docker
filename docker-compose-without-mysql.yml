@@ -1,0 +1,23 @@
+apache:
+ image: bharatak/bahmni-apache
+ ports:
+  - "443:8080"
+ mem_limit: 512m
+ volumes:
+  - ~/dock/jss-config:/var/www/bahmni_config
+  - ~/dock/openmrs-module-bahmniapps/ui/app:/var/www/bahmniapps
+ links:
+  - web
+web:
+ image: bharatak/bahmni-web
+ ports:
+  - "8080:8080"
+ environment:
+  - OPENMRS_RUNTIME_PROPERTIES_FILE=/root/.OpenMRS/openmrs-runtime.properties
+  - MYSQL=10.136.20.16
+ expose:
+  - "8080"
+ mem_limit: 2000m
+ volumes:
+  - ~/dock/openmrs-distro-bahmni/distro/target/distro:/root/.OpenMRS/modules
+  - ~/dock/jss-config/openmrs/obscalculator:/root/.OpenMRS/obscalculator

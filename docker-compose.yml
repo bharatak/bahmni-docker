@@ -1,23 +1,18 @@
 apache:
- image: bahmni-apache
+ image: bahmni-erp
  ports:
-  - "443:8080"
- mem_limit: 512m
+  - "8069:8069"
  volumes:
-  - ~/dock/jss-config:/var/www/bahmni_config
-  - ~/dock/openmrs-module-bahmniapps/ui/app:/var/www/bahmniapps
- links:
-  - web
-web:
- image: bahmni-web
- ports:
-  - "8080:8080"
+  - ~/dock/erp:/var/www/bahmni_config
  environment:
-  - OPENMRS_RUNTIME_PROPERTIES_FILE=/root/.OpenMRS/openmrs-runtime.properties
-  - MYSQL=10.136.20.16
+  - DB_HOST=pgsql
+  - DB_USER=openerp  
+ links:
+  - pgsql
+pgsql:
+ image: bahmni-pgsql
+ ports:
+  - "5432:5432"
  expose:
-  - "8080"
+  - "5432"
  mem_limit: 2000m
- volumes:
-  - ~/dock/openmrs-distro-bahmni/distro/target/distro:/root/.OpenMRS/modules
-  - ~/dock/jss-config/openmrs/obscalculator:/root/.OpenMRS/obscalculator

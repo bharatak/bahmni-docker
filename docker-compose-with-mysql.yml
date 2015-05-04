@@ -1,16 +1,16 @@
 apache:
- image: bahmni-apache
+ image: bharatak/bahmni-apache
  ports:
-  - "49003:8080"
+  - "443:8080"
  volumes:
   - ~/dock/jss-config:/var/www/bahmni_config
   - ~/dock/openmrs-module-bahmniapps/ui/app:/var/www/bahmniapps
  links:
   - web
 web:
- image: bahmni-web
+ image: bharatak/bahmni-web
  ports:
-  - "49001:8080"
+  - "8080:8080"
  environment:
   - OPENMRS_RUNTIME_PROPERTIES_FILE=/root/.OpenMRS/openmrs-runtime.properties
  links:
@@ -21,8 +21,9 @@ web:
   - ~/dock/openmrs-distro-bahmni/distro/target/distro:/root/.OpenMRS/modules
   - ~/dock/jss-config/openmrs/obscalculator:/root/.OpenMRS/obscalculator
 mysql:
- image: bahmni-mysql
+ image: bharatak/bahmni-mysql
  environment: 
   - MYSQL_ROOT_PASSWORD=password
+  - STARTUP_SQL="/tmp/mysql_backup.sql"
  ports:
-  - "49000:3306"
+  - "3306:3306"
