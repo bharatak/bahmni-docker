@@ -1,9 +1,7 @@
-apache:
+openerp:
  image: bahmni-erp
  ports:
   - "8069:8069"
- volumes:
-  - ~/dock/erp:/var/www/bahmni_config
  environment:
   - DB_HOST=pgsql
   - DB_USER=openerp  
