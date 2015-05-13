@@ -2,9 +2,6 @@ apache:
  image: bharatak/bahmni-apache
  ports:
   - "443:8080"
- volumes:
-  - ~/dock/jss-config:/var/www/bahmni_config
-  - ~/dock/openmrs-module-bahmniapps/ui/app:/var/www/bahmniapps
  links:
   - web
 web:

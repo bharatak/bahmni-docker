@@ -1,38 +1,34 @@
-FROM ubuntu:14.04
+FROM centos:7
 MAINTAINER Bharat Akkinepalli <bharatak@thoughtworks.com>
 
-RUN apt-get -yqq update
-RUN apt-get -yqq install apache2
-RUN a2enmod ssl
-RUN a2enmod cache
-RUN a2enmod cache_disk
-RUN a2enmod rewrite
-RUN a2enmod headers
-RUN a2enmod proxy_http
+RUN sed -i 's/enabled=1/enabled=0/g' /etc/yum/pluginconf.d/fastestmirror.conf
+RUN yum --setopt=tsflags=nodocs -y update
+RUN yum --setopt=tsflags=nodocs -y install httpd mod_ssl wget unzip
+RUN httpd -k start
 
-ENV APACHE_RUN_USER www-data
-ENV APACHE_RUN_GROUP www-data
-ENV APACHE_LOG_DIR /var/log/apache2
-ENV APACHE_PID_FILE /var/run/apache2.pid
-ENV APACHE_RUN_DIR /var/run/apache2
-ENV APACHE_LOCK_DIR /var/lock/apache2
+ENV APACHE_RUN_USER apache
+ENV APACHE_RUN_GROUP apache
+ENV APACHE_LOG_DIR /var/log/httpd
+ENV APACHE_PID_FILE /var/run/httpd/httpd.pid
+ENV APACHE_RUN_DIR /var/run/httpd
 
-RUN mkdir -p $APACHE_RUN_DIR $APACHE_LOCK_DIR $APACHE_LOG_DIR
-RUN chown -R root:root /var/www
-ADD ssl.conf /etc/apache2/mods-enabled/ssl.conf
+RUN mkdir -p $APACHE_LOG_DIR $APACHE_RUN_DIR
+RUN chown -R root:root /var/www/html
+
 ADD localhost.crt /etc/ssl/certs/localhost.crt
-RUN chown root:ssl-cert /etc/ssl/certs/localhost.crt
-ADD localhost.key /etc/ssl/private/localhost.key
-RUN chown root:root /etc/ssl/private/localhost.key
+RUN chown root:root /etc/ssl/certs/localhost.crt
+ADD localhost.key /etc/pki/tls/private/localhost.key
+RUN chown root:root /etc/pki/tls/private/localhost.key
 
-WORKDIR /var/www
+ADD setup-artifacts.sh /tmp/setup-artifacts.sh
 
+RUN chmod +x /tmp/setup-artifacts.sh
 
+RUN /tmp/setup-artifacts.sh apache
+
+WORKDIR /var/www/html
 EXPOSE 443
-VOLUME [ "/var/www/bahmni_config" ]
-VOLUME [ "/var/www/bahmniapps" ]
 
-ENTRYPOINT [ "/usr/sbin/apache2" ]
+RUN echo 'Starting Apache ...'
 
-CMD ["-D", "FOREGROUND"]
-
+ENTRYPOINT [ "/usr/sbin/httpd","-k","start", "-D", "FOREGROUND" ]
