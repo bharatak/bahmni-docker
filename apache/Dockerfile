@@ -3,7 +3,7 @@ MAINTAINER Bharat Akkinepalli <bharatak@thoughtworks.com>
 
 RUN sed -i 's/enabled=1/enabled=0/g' /etc/yum/pluginconf.d/fastestmirror.conf
 RUN yum --setopt=tsflags=nodocs -y update
-RUN yum --setopt=tsflags=nodocs -y install httpd mod_ssl wget unzip
+RUN yum --setopt=tsflags=nodocs -y install httpd mod_ssl wget unzip && yum clean all
 RUN httpd -k start
 
 ENV APACHE_RUN_USER apache
