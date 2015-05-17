@@ -41,7 +41,8 @@ function setup_mrs(){
 }
 
 function setup_elis(){
-	$WGET $ELIS_URL -O /var/lib/tomcat7/webapps/openelis.war
+	$WGET $ELIS_URL -O /tmp/openelis.war
+	unzip /tmp/openelis.war -d /var/lib/tomcat7/webapps/openelis/
 }
 
 function setup_apache(){
