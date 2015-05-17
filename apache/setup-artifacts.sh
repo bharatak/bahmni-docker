@@ -46,11 +46,11 @@ function setup_elis(){
 
 function setup_apache(){
 	$WGET $JSS_CONFIG_URL -O /tmp/jss_config.zip
-	unzip -o -q /tmp/jss_config.zip -d /var/www/html/bahmni_config
+	unzip -o -q /tmp/jss_config.zip -d /var/www/bahmni_config
 	rm -f /tmp/jss_config.zip
 
 	$WGET $BAHNMI_APPS_URL -O /tmp/bahmniapps.zip
-	unzip -o -q /tmp/bahmniapps.zip -d /var/www/html/bahmniapps
+	unzip -o -q /tmp/bahmniapps.zip -d /var/www/bahmniapps
 	rm -f /tmp/bahmniapps.zip
 }
 
