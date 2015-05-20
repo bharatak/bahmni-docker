@@ -29,8 +29,6 @@ RUN chmod 777 /root/.OpenMRS/setupDbAndStart.sh
 
 RUN chown -R root:root /root/.OpenMRS
 
-ADD atomfeed.properties /var/lib/tomcat7/webapps/openelis/WEB-INF/classes/atomfeed.properties
-
 VOLUME [ "/var/lib/tomcat7/webapps/" ]
 
 VOLUME [ "/root/.OpenMRS/modules" ]

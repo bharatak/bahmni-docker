@@ -4,7 +4,7 @@ set -e
 case "$1" in
 	"install" )
 		echo -e "Setting up for the first time"
-		docker-compose up -d mysql pgsql
+		docker-compose up -d mysql
 		echo -e "Waiting for mysql and pgsql to startup"
 		sleep 30
 		echo -e "Starting other containers now"

@@ -1,1 +1,0 @@
-dc up --no-recreate
