@@ -13,6 +13,7 @@ BAHMNI_DISTRO_URL=$BASE_URL/go/files/Bahmni_MRS_$BRANCH/$ARTIFACTS_PIPELINE_VERS
 ELIS_URL=$BASE_URL/go/files/OpenElis_$BRANCH/$ARTIFACTS_PIPELINE_VERSION/Build/Latest/build/deployables/openelis.war
 JSS_CONFIG_URL=$BASE_URL/go/files/Build_jss_config_$BRANCH/$ARTIFACTS_PIPELINE_VERSION/BuildStage/Latest/Build/jss_config.zip
 BAHNMI_APPS_URL=$BASE_URL/go/files/Bahmni_MRS_$BRANCH/$ARTIFACTS_PIPELINE_VERSION/BuildStage/Latest/BahmniApps/bahmniapps.zip
+BAHMNI_ERP_ATOMFEED_SERVICE=$BASE_URL/go/files/OpenERP_$BRANCH/$ARTIFACTS_PIPELINE_VERSION/runFunctionalTestsStage/Latest/openerp-atomfeed-service/openerp-atomfeed-service.war
 
 function setup_erp(){
 	$WGET $ERP_URL -O /tmp/openerp-modules.zip
@@ -28,6 +29,7 @@ function setup_erp(){
 function setup_web(){
 	setup_mrs
 	setup_elis
+	setup_openerp_atomfeed
 }
 
 function setup_mrs(){
@@ -43,6 +45,11 @@ function setup_mrs(){
 function setup_elis(){
 	$WGET $ELIS_URL -O /tmp/openelis.war
 	unzip /tmp/openelis.war -d /var/lib/tomcat7/webapps/openelis/
+}
+
+function setup_openerp_atomfeed(){
+	$WGET $BAHMNI_ERP_ATOMFEED_SERVICE -O /tmp/openerp-atomfeed-service.war
+	unzip /tmp/openerp-atomfeed-service.war -d /var/lib/tomcat7/webapps/openerp-atomfeed-service/
 }
 
 function setup_apache(){
